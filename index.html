@@ -36,5 +36,36 @@ function showTime(){
     clock.innerHTML = "<p align=center >" + "北京时间：<br>" +year+"年"+month+"月"+date +"日<br>"+hour+"时"+minute+"分"+second+"秒</p>"
 }
 setInterval(showTime,1000)
+	<div class="loveTimer"></div>
+
+var timer = document.querySelector(".loveTimer");
+// 修改为相识时间（格式：YYYY-MM-DDTHH:mm:ss）
+var startDate = new Date("2017-05-01T12:00:00"); 
+
+function calculateTimeTogether() {
+    var now = new Date();
+    var diff = now - startDate; // 总毫秒数
+    
+    // 计算各时间单位
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var minutes = Math.floor((diff % 3600000) / 60000);
+    var seconds = Math.floor((diff % 60000) / 1000);
+
+    // 构建显示文本
+    var timeString = "我们已相伴：<br>" + 
+        days + " 天 " + 
+        hours + " 小时 " + 
+        minutes + " 分 " + 
+        seconds + " 秒";
+    
+    timer.innerHTML = "<p align='center'>" + timeString + "</p>";
+}
+
+// 立即执行一次避免初始空白
+calculateTimeTogether(); 
+setInterval(calculateTimeTogether, 1000);
+
+
 </script> 
 </html>
