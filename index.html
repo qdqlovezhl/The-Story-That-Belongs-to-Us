@@ -4,23 +4,207 @@
 		<meta charset="UTF-8">
 		<title>甜蜜回忆录</title>
 		<style>
-			
-		</style>
-	</head>
-	<body>
-	
-		<h3 align="center">欢迎来到我们的回忆小窝</h3>
-		<a href="1.html"><img src="小狗线团1.jpg" width="100"  height="100"/></a>
-    <p>故事1</p>
-                <a href="2.html"><img src="小狗线团2.jpg" width="100"  height="100"/></a>
-   <p>故事2</p>
-		<a href="3.html"><img src="小狗线团3.jpg" width="100"  height="100"/></a>
-		<p>故事3</p>
-		<a href="4.html"><img src="小狗线团4.jpg" width="100"  height="100"/></a>
-		<p>故事4</p>
-		<a href="5.html"><img src="小狗线团5.jpg" width="100"  height="100"/></a>
-	<p>故事5</p>
-	</body>
+			:root {
+    --main-color: #ff69b4;
+    --secondary-color: #87cefa;
+    --text-color: #666;
+}
+
+body {
+    background: linear-gradient(135deg, #ffe8f0 0%, #e8f4ff 100%);
+    font-family: 'Segoe UI', '华文行楷', cursive;
+    min-height: 100vh;
+}
+
+h3 {
+    font-size: 2.5em;
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+.story-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.story-card {
+    position: relative;
+    perspective: 1000px;
+    transition: transform 0.6s;
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.story-card:hover {
+    transform: translateY(-10px) rotateZ(2deg);
+    box-shadow: 0 12px 40px rgba(255,105,180,0.3);
+}
+
+.story-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all 0.5s;
+    filter: grayscale(20%);
+}
+
+.story-card:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+.story-card p {
+    text-align: center;
+    color: #666;
+    font-size: 1.2em;
+    margin-top: 15px;
+    transition: all 0.3s;
+    transform: translateZ(0);
+}
+
+.story-card:hover p {
+    color: #ff1493;
+    transform: scale(1.1);
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 飘落花瓣特效 */
+.petal {
+    position: fixed;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .story-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<body>
+<!-- 动态花瓣 -->
+<div id="petals"></div>
+
+<h3 align="center">欢迎来到我们的回忆小窝</h3>
+
+<div class="story-gallery">
+    <div class="story-card">
+        <a href="1.html"><img src="小狗线团1.jpg"/></a>
+        <a href="1.html"><p>故事1</p></a>
+    </div>
+    <!-- 重复其他故事卡片... -->
+       <div class="story-card">
+        <a href="2.html"><img src="小狗线团2.jpg"/></a>
+        <a href="2.html"><p>故事2</p></a>
+    </div>
+       <div class="story-card">
+        <a href="3.html"><img src="小狗线团3.jpg"/></a>
+        <a href="3.html"><p>故事3</p></a>
+    </div>
+       <div class="story-card">
+        <a href="4.html"><img src="小狗线团4.jpg"/></a>
+        <a href="4.html"><p>故事4</p></a>
+    </div>
+       <div class="story-card">
+        <a href="5.html"><img src="小狗线团5.jpg"/></a>
+        <a href="5.html"><p>故事5</p></a>
+    </div>
+</div>
+
+<script>
+// 花瓣生成器
+function createPetals() {
+    const petalEmojis = ['🌸', '🎀', '💮', '💖'];
+    for(let i = 0; i < 20; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.innerHTML = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+        petal.style.fontSize = Math.random() * 20 + 15 + 'px';
+        petal.style.opacity = Math.random() * 0.5 + 0.3;
+        document.getElementById('petals').appendChild(petal);
+    }
+}
+
+// 卡片入场动画
+function animateCards() {
+    const cards = document.querySelectorAll('.story-card');
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 150);
+    });
+}
+
+// 图片点击特效
+document.querySelectorAll('.story-card img').forEach(img => {
+    img.addEventListener('click', function(e) {
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,105,180,0.3);
+            border-radius: 50%;
+            transform: translate(-50%,-50%);
+            pointer-events: none;
+            animation: rippleEffect 0.6s;
+        `;
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// 初始化
+window.addEventListener('DOMContentLoaded', () => {
+    createPetals();
+    animateCards();
+    
+    // 背景音乐
+    const bgm = new Audio('your-bgm.mp3');
+    bgm.loop = true;
+    document.addEventListener('click', () => bgm.play(), { once: true });
+});
+
+// 添加CSS动画
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes rippleEffect {
+        from { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+        to { transform: translate(-50%,-50%) scale(2); opacity: 0; }
+    }
+    .story-card {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+
 	<div class="digitalClock"></div>
 <script>
 var clock =document.querySelector(".digitalClock");
@@ -68,4 +252,5 @@ function calculateTimeTogether() {
 calculateTimeTogether(); 
 setInterval(calculateTimeTogether, 1000);
 </script>
+
 </html>
