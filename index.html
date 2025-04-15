@@ -33,13 +33,13 @@ function showTime(){
     date = now.getDate();
     month = now.getMonth()+1;
     year = now.getFullYear();
-    clock.innerHTML = "<p align=center >" + "北京时间：<br>" +year+"年"+month+"月"+date +"日<br>"+hour+"时"+minute+"分"+second+"秒</p>"
+    clock.innerHTML = "<p align=center >" + "现在是北京时间：<br>" +year+"年"+month+"月"+date +"日<br>"+hour+"时"+minute+"分"+second+"秒</p>"
 }
 setInterval(showTime,1000)
-</script>
-	<script>
-	<div class="loveTimer"></div>
 
+</script> 
+<div class="loveTimer"></div>
+<script>
 var timer = document.querySelector(".loveTimer");
 // 修改为相识时间（格式：YYYY-MM-DDTHH:mm:ss）
 var startDate = new Date("2017-05-01T12:00:00"); 
@@ -67,7 +67,5 @@ function calculateTimeTogether() {
 // 立即执行一次避免初始空白
 calculateTimeTogether(); 
 setInterval(calculateTimeTogether, 1000);
-
-
-</script> 
+</script>
 </html>
