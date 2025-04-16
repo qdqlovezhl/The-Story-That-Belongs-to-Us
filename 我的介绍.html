@@ -1,11 +1,244 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>我的介绍</title>
-	</head>
-	<body>
-		<img src="头像1.png" alt="我" >
-	</body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页 | 设计师 & 开发者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2E86C1;
+            --secondary-color: #28B463;
+            --text-color: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', '微软雅黑', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 头部区域 */
+        .profile-header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 0 0 2rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .avatar:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* 主要内容区 */
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 技能卡片 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* 时间轴 */
+        .timeline {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .timeline-item {
+            padding: 1.5rem;
+            margin-left: 30px;
+            border-left: 3px solid var(--primary-color);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background: var(--primary-color);
+            border: 3px solid white;
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 24px;
+        }
+
+        /* 联系卡片 */
+        .contact-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-header">
+        <div class="container">
+            <img src="头像1.png" alt="我的头像" class="avatar">
+            <h1>笨蛋权</h1>
+            <p>全栈设计师 & 开发者</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 关于我 -->
+        <section class="content-section">
+            <h2>关于我</h2>
+            <p>拥有5年经验的数字创意专家，擅长将设计思维与技术创新相结合。热爱开发直观的用户界面和构建可扩展的Web应用。</p>
+        </section>
+
+        <!-- 专业技能 -->
+        <section class="content-section">
+            <h2>专业技能</h2>
+        </section>
+```html
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-palette skill-icon"></i>
+                    <div>
+                        <h3>UI/UX 设计</h3>
+                        <p>Figma/Sketch/Adobe XD</p>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code skill-icon"></i>
+                    <div>
+                        <h3>前端开发</h3>
+                        <p>React/Vue/TypeScript</p>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-server skill-icon"></i>
+                    <div>
+                        <h3>后端开发</h3>
+                        <p>Node.js/Python/Docker</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间轴 -->
+        <section class="content-section">
+            <h2>经历</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>高级全栈工程师 @ TechCorp</h3>
+                    <p>2020 - 至今</p>
+                    <ul>
+                        <li>领导跨平台应用开发</li>
+                        <li>优化核心架构性能提升60%</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>UX设计师 @ DesignStudio</h3>
+                    <p>2018 - 2020</p>
+                    <ul>
+                        <li>完成20+商业项目设计</li>
+                        <li>客户满意度达98%</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系卡片 -->
+        <section class="contact-card">
+            <h2>保持联系</h2>
+            <p>欢迎与我讨论合作机会或技术交流</p>
+            <div class="social-links">
+                <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </section>
+    </div>
+</body>
 </html>
 
