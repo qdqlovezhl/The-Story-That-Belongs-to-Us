@@ -1,1 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的故事 | 爱の小屋</title>
+    <style>
+    		 .audio-player {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* 自定义播放控件 */
+        .custom-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        /* 进度条样式 */
+        .progress-container {
+            flex-grow: 1;
+            height: 5px;
+            background: #e9ecef;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #2196F3;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        /* 控制按钮 */
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: #2196F3;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 时间显示 */
+        .time-display {
+            font-family: monospace;
+            color: #6c757d;
+        }
+
+        /* 音量控制 */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: #e9ecef;
+            border-radius: 3px;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #2196F3;
+            border-radius: 50%;
+        }
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', cursive;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+        }
+
+        /* 导航栏 */
+        .love-nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-title {
+            font-size: 1.8rem;
+            color: #e74c3c;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* 主内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        /* 情侣横幅 */
+        .couple-banner {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .couple-names {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .heart {
+            color: #e74c3c;
+            font-size: 3rem;
+            margin: 1rem 0;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* 时间线 */
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 照片墙 */
+        .photo-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* 动画效果 */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .couple-names {
+                font-size: 1.8rem;
+            }
+            
+            .heart {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="love-nav">
+        <div class="nav-title">❤️ 权玲的奇缘 ❤️</div>
+    </nav>
+
+    <div class="container">
+        <!-- 情侣横幅 -->
+        <section class="couple-banner">
+            <div class="couple-names">
+                <span>笨蛋权</span> ❤️ <span>傻瓜玲</span>
+            </div>
+            <a href="love.html" style="text-decoration: none;"><div class="heart">♥</div></a>
+            <p>从相遇那天起，我的世界因你而完整</p>
+        </section>
+
+        <!-- 时间线 -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>初次见面</h3>
+                <p>2023.06.23</p>
+                <p>雨中的相见</p>
+            </div>
+            <div class="timeline-item">
+                <h3>确定关系</h3>
+                <p>2022.07.16</p>
+                <p>星空下的约定</p>
+            </div>
+            <div class="timeline-item">
+                <h3>重要纪念</h3>
+                <p>2017.05.01</p>
+                <p>人海中的第一次相识</p>
+            </div>
+        </div>
+
+        <!-- 照片墙 -->
+        <div class="photo-wall">
+            <div class="photo-item">
+                <img src="photo1.jpg" alt="我们的回忆">
+            </div>
+            <div class="photo-item">
+                <img src="photo2.jpg" alt="甜蜜时刻">
+            </div>
+            <div class="photo-item">
+                <img src="photo3.jpg" alt="旅行记忆">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 爱心点击特效
+        document.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            heart.style.position = 'absolute';
+            heart.style.color = '#ff4081';
+            heart.style.fontSize = '24px';
+            heart.style.pointerEvents = 'none';
+            heart.style.animation = 'heartbeat 0.6s linear';
+            heart.innerHTML = '❤️';
+            
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 600);
+        });
+
+        // 页面加载特效
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+   
+    <!-- 自定义播放器 -->
+    <div class="audio-player">
+        <h2></h2>
+        <audio id="main-audio">
+            <source src="img/苏见信 (信) - 成败.mp3" type="audio/mpeg">
+            <source src="img/苏见信 (信) - 成败.mp3" type="audio/ogg">
+        </audio>
+        
+        <div class="custom-controls">
+            <button class="control-btn" id="playBtn">▶</button>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <span class="time-display" id="currentTime">0:00</span>
+            <span>/</span>
+            <span class="time-display" id="duration">0:00</span>
+            <div class="volume-control">
+                <span>🔊</span>
+                <input type="range" class="volume-slider" id="volume" 
+                       min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const audio = document.getElementById('main-audio');
+        const playBtn = document.getElementById('playBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTime = document.getElementById('currentTime');
+        const duration = document.getElementById('duration');
+        const volume = document.getElementById('volume');
+
+        // 播放/暂停控制
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = '⏸';
+            } else {
+                audio.pause();
+                playBtn.textContent = '▶';
+            }
+        });
+
+        // 进度条更新
+        audio.addEventListener('timeupdate', updateProgress);
+        
+        // 点击进度条跳转
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pos * audio.duration;
+        });
+
+        // 音量控制
+        volume.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // 格式化时间显示
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // 更新进度条和时间
+        function updateProgress() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentTime.textContent = formatTime(audio.currentTime);
+            if (!isNaN(audio.duration)) {
+                duration.textContent = formatTime(audio.duration);
+            }
+        }
+
+        // 初始化时长显示
+        audio.addEventListener('loadedmetadata', () => {
+            duration.textContent = formatTime(audio.duration);
+        });
+    </script>
+<div class="loveTimer"></div>
+<script>
+var timer = document.querySelector(".loveTimer");
+// 修改为相识时间（格式：YYYY-MM-DDTHH:mm:ss）
+var startDate = new Date("2017-05-01T12:00:00"); 
+
+function calculateTimeTogether() {
+    var now = new Date();
+    var diff = now - startDate; // 总毫秒数
+    
+    // 计算各时间单位
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var minutes = Math.floor((diff % 3600000) / 60000);
+    var seconds = Math.floor((diff % 60000) / 1000);
+
+    // 构建显示文本
+    var timeString = "我们已相伴：<br>" + 
+        days + " 天 " + 
+        hours + " 小时 " + 
+        minutes + " 分 " + 
+        seconds + " 秒";
+    
+    timer.innerHTML = "<p align='center'>" + timeString + "</p>";
+}
+
+// 立即执行一次避免初始空白
+calculateTimeTogether(); 
+setInterval(calculateTimeTogether, 1000);
+</script>
+
+</body>
+
+</html>
 
