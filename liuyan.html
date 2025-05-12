@@ -1,0 +1,34 @@
+
+  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  <!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<!-- JS -->
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+ <div id="gitalk-container"></div>
+
+</body>
+<script>const gitalk = new Gitalk({
+  clientID: 'Ov23li91H3zJE31wyhRw',          // 必填
+  clientSecret: '70b01cba900753b8bfffc8c2185f471aa6f32bf8',  // 必填（仅服务端需要）
+  repo: 'qdqlovezhl',                     // 存储评论的仓库（如blog-comments）
+  owner: 'qdqlovezhl',          // 仓库所有者
+  admin: ['qdqlovezhl'],              // 可管理评论的GitHub账号
+  id: location.pathname,              // 页面唯一标识（建议使用路径）
+  language: 'zh-CN',                  // 界面语言
+  distractionFreeMode: false          // 是否开启全屏遮罩
+});
+gitalk.render('gitalk-container');    // 渲染到容器
+<script/>
+</html>
