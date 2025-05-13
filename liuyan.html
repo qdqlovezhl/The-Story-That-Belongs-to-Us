@@ -1,33 +1,53 @@
+<!-- 留言表单 -->
+<form id="messageForm">
+  <input type="text" id="username" placeholder="昵称" required>
+  <textarea id="content" placeholder="留言内容" required></textarea>
+  <button type="submit">提交</button>
+</form>
 
+<!-- 留言展示区 -->
+<div id="messages"></div>
+
+<script>
+const CONFIG = {
+  token: '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',  // 替换为你的token
+  owner: 'qdqlovezhl',       // GitHub用户名
+  repo: 'blog-comments'    // 仓库名
+};
+
+// 提交留言
+document.getElementById('messageForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
   
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-
-</head>
-
-<body>
-  <div id="gitalk-container"></div>
-
-
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script>const gitalk = new Gitalk({
-  clientID: 'Ov23li91H3zJE31wyhRw',          // 必填
-  clientSecret: '70b01cba900753b8bfffc8c2185f471aa6f32bf8',  // 必填（仅服务端需要）
-  repo: 'blog-comments',                     // 存储评论的仓库（如blog-comments）
-  owner: 'qdqlovezhl',          // 仓库所有者
-  admin: ['qdqlovezhl'],              // 可管理评论的GitHub账号
-  id: location.pathname,              // 页面唯一标识（建议使用路径）
-  language: 'zh-CN',                  // 界面语言
-  distractionFreeMode: false          // 是否开启全屏遮罩
+  await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `token ${CONFIG.token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: `${username.value}的留言`,
+      body: content.value
+    })
+  });
+  loadMessages(); // 重新加载留言
 });
-gitalk.render('gitalk-container');    // 渲染到容器
-<script/>
-</body>
 
-</html>
+// 加载留言
+async function loadMessages() {
+  const res = await fetch(
+    `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues`,
+    { headers: { 'Authorization': `token ${CONFIG.token}` } }
+  );
+  const data = await res.json();
+  
+  document.getElementById('messages').innerHTML = data.map(msg => `
+    <div class="message">
+      <h3>${msg.title}</h3>
+      <p>${msg.body}</p>
+      <small>${new Date(msg.created_at).toLocaleString()}</small>
+    </div>
+  `).join('');
+}
+</script>
+
