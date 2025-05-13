@@ -1,53 +1,23 @@
-<!-- 留言表单 -->
-<form id="messageForm">
-  <input type="text" id="username" placeholder="昵称" required>
-  <textarea id="content" placeholder="留言内容" required></textarea>
-  <button type="submit">提交</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub留言板</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .message { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>留言板</h1>
+    <form id="commentForm">
+        <input type="text" id="username" placeholder="昵称" required>
+        <textarea id="content" placeholder="留言内容" required></textarea>
+        <button type="submit">提交</button>
+    </form>
+    <div id="messages"></div>
 
-<!-- 留言展示区 -->
-<div id="messages"></div>
-
-<script>
-const CONFIG = {
-  token: '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',  // 替换为你的token
-  owner: 'qdqlovezhl',       // GitHub用户名
-  repo: 'blog-comments'    // 仓库名
-};
-
-// 提交留言
-document.getElementById('messageForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `token ${CONFIG.token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      title: `${username.value}的留言`,
-      body: content.value
-    })
-  });
-  loadMessages(); // 重新加载留言
-});
-
-// 加载留言
-async function loadMessages() {
-  const res = await fetch(
-    `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues`,
-    { headers: { 'Authorization': `token ${CONFIG.token}` } }
-  );
-  const data = await res.json();
-  
-  document.getElementById('messages').innerHTML = data.map(msg => `
-    <div class="message">
-      <h3>${msg.title}</h3>
-      <p>${msg.body}</p>
-      <small>${new Date(msg.created_at).toLocaleString()}</small>
-    </div>
-  `).join('');
-}
-</script>
+    <script src="app.js"></script>
+</body>
+</html>
 
