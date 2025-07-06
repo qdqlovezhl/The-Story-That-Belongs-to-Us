@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪念页面 - 理想已逝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: rgba(255, 255, 255, 0.85);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .memorial-text {
+            margin-bottom: 3rem;
+        }
+        
+        .main-text {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .sub-text {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-top: 1.5rem;
+            font-weight: 400;
+        }
+         .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-top: 3rem;
+            opacity: 0.7;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        
+        .divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            margin: 2rem auto;
+        }
+        
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        /* 落叶效果 */
+        .leaf {
+            position: absolute;
+            top: -50px;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        
+        .leaf-1 {
+            left: 5%;
+            animation: fall 15s linear 0s infinite;
+        }
+        
+        .leaf-2 {
+            left: 20%;
+            animation: fall 18s linear 3s infinite;
+        }
+        
+        .leaf-3 {
+            left: 35%;
+            animation: fall 14s linear 1s infinite;
+        }
+        
+        .leaf-4 {
+            left: 50%;
+            animation: fall 16s linear 4s infinite;
+        }
+        
+        .leaf-5 {
+            left: 65%;
+            animation: fall 12s linear 2s infinite;
+        }
+        
+        .leaf-6 {
+            left: 80%;
+            animation: fall 20s linear 5s infinite;
+        }
+        
+        .leaf-7 {
+            left: 95%;
+            animation: fall 17s linear 1.5s infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+            }
+            20% {
+                transform: translateX(-20px) rotate(20deg);
+            }
+            40% {
+                transform: translateX(15px) rotate(-15deg);
+            }
+            60% {
+                transform: translateX(-10px) rotate(10deg);
+            }
+            80% {
+                transform: translateX(5px) rotate(-5deg);
+            }
+            100% {
+                top: 100vh;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 3s ease-in-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .delayed-1 { animation-delay: 0.5s; }
+        .delayed-2 { animation-delay: 1.5s; }
+        .delayed-3 { animation-delay: 2.5s; } /* 响应式调整 */
+        @media (max-width: 768px) {
+            .main-text {
+                font-size: 3rem;
+            }
+            
+            .sub-text {
+                font-size: 1.4rem;
+            }
+            
+            .quote {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-text {
+                font-size: 2.2rem;
+            }
+            
+            .sub-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    
+    <!-- 落叶 -->
+    <div class="leaf leaf-1">🍂</div>
+    <div class="leaf leaf-2">🍁</div>
+    <div class="leaf leaf-3">🍂</div>
+    <div class="leaf leaf-4">🍁</div>
+    <div class="leaf leaf-5">🍂</div>
+    <div class="leaf leaf-6">🍁</div>
+    <div class="leaf leaf-7">🍂</div>
+    
+    <div class="container">
+        <div class="memorial-text">
+            <h1 class="main-text fade-in">理想已破灭</h1>
+            <h2 class="sub-text fade-in delayed-1">斯人已逝</h2>
+            
+            <div class="divider"></div>
+            
+            <p class="sub-text fade-in delayed-2">本站停止更新任何功能</p >
+        </div>
+        
+        <div class="quote fade-in delayed-3">
+            "理想不会消逝，它只是变换了形态。如同星辰陨落，化作尘埃，终将在另一片天空重新闪耀。"
+        </div>
+    </div>
+
+    <!-- 粒子效果库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 初始化粒子背景
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 70,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
